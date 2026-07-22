@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 /* CSS Variables for Themes */
 :root {
@@ -11,8 +11,9 @@
     --border-color: #e2e8f0;
     --card-bg: #ffffff;
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+    --font-mono: 'JetBrains Mono', Fira Code, monospace;
     --transition-speed: 0.25s;
 }
 
@@ -343,39 +344,43 @@ p {
 /* Timeline/Updates on Home Page */
 .timeline {
     position: relative;
-    border-left: 2px solid var(--border-color);
-    margin: 2rem 0;
+    border-left: 1px solid var(--border-color);
+    margin: 2.5rem 0;
     padding-left: 1.5rem;
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: calc(-1.5rem - 7px);
+    left: calc(-1.5rem - 4.5px);
     top: 6px;
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background-color: var(--bg-color);
-    border: 2px solid var(--text-muted);
-    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    border: 2px solid var(--border-color);
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease;
 }
 
 .timeline-item:hover::before {
     border-color: var(--accent-interactive);
     background-color: var(--accent-interactive);
+    transform: scale(1.3);
 }
 
 .timeline-date {
-    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--text-muted);
-    margin-bottom: 0.25rem;
+    color: var(--accent-interactive);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .timeline-content {
@@ -407,7 +412,8 @@ p {
 
 .pub-tag {
     display: inline-block;
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -680,9 +686,10 @@ p {
 }
 
 .cv-date {
+    font-family: var(--font-mono);
     font-weight: 600;
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    color: var(--accent-interactive);
+    font-size: 0.85rem;
     padding-top: 0.15rem;
 }
 
@@ -786,4 +793,67 @@ p {
         gap: 1.5rem;
         text-align: center;
     }
+}
+
+/* Audio Brief Card styles (NotebookLM summary container) */
+.audio-brief-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--card-shadow);
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.audio-brief-card:hover {
+    border-color: var(--accent-interactive);
+}
+
+.audio-brief-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.audio-brief-icon {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: var(--accent-interactive);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.audio-brief-player {
+    border-radius: 6px;
+    overflow: hidden;
+    height: 100px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+}
+
+.audio-brief-player iframe {
+    border: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Dark mode SoundCloud invert trick */
+[data-theme="dark"] .audio-brief-player iframe {
+    filter: invert(0.9) hue-rotate(180deg);
+}
+
+[data-theme="dark"] .audio-brief-card {
+    background-color: rgba(30, 41, 59, 0.4);
+    border-color: rgba(255, 255, 255, 0.06);
 }
